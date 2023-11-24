@@ -7,6 +7,11 @@ class Mutations::CreatePost < Mutations::BaseMutation
     field :errors, [String], null: false
 
     def resolve(title:, body:, author:)
+
+        if author == nil
+            author = "Nameless"
+        end
+
         post = Post.new(title: title, body: body, author: author)
         if post.save
             {
